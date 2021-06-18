@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Canvas Rebote`+ Colision</title>
+	<style>
+		canvas{
+			border: 1px solid;
+			/*width: 100%;
+			height: 100%;*/
+		}
+		body{
+			margin:0;
+			padding:0;
+			width: 100%;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script>
+		var canvas = document.querySelector("#canvas");
+		var c = canvas.getContext('2d');
+
+	
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+	
+		// c.beginPath(); 
+		// c.arc( x, y, 30, 0, Math.PI * 2, false); 
+		// c.strokeStyle = 'blue'; 
+		// c.stroke();
+			
+		//2 crear variable para movimiento en x y y
+		var x = 200;
+		//luego
+		var y = 200
+		//4
+		var dx = 4; //eso a cambiar segun la velocidad deseasda
+		//luego
+		var dy = 4;
+		//7
+		var radius = 30;
+		//1 crar function animate con requestAnimationFrame para que se haga el dibujo una y otra vez
+		function animate(){
+			requestAnimationFrame(animate);
+			//3 clear canvas
+			// c.clearRect(0, 0, innerWidth, innerHeight)
+
+			// c.beginPath(); 
+			// c.arc( x, 500, 30, 0, Math.PI * 2, false); 
+			// c.strokeStyle = 'blue'; 
+			// c.stroke();
+
+			// x += dx;
+
+			//5 rebote
+			// if(x > innerWidth){
+			// 	dx = -dx;
+			// }
+			
+			//6 para que el rebote se haga desde el borde y no el centro le añadimos el RADIUS declarar variable //7 y para el rebote a la izquierda es x<0
+			// if(x + radius > innerWidth || x-radius < 0){
+			// 	dx = -dx;
+			// }
+			
+			// x += dx;
+
+			//8 ahora vamos a hacer lo mismo para la altura declara variable y,  dy velocidad
+			c.clearRect(0, 0, innerWidth, innerHeight)
+
+			c.beginPath(); 
+			c.arc( x, y, 30, 0, Math.PI * 2, false); 
+			c.strokeStyle = 'blue'; 
+			c.stroke();
+
+			if(x + radius > innerWidth || x-radius < 0){
+				dx = -dx;
+			}
+			
+			if(y + radius > innerHeight || y-radius < 0){
+				dy = -dy;
+			}
+
+			x += dx;
+			y += dy
+		}
+
+		animate();
+	
+	</script>
+
+</body>
+</html>

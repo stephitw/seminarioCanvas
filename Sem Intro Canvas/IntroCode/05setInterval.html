@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		canvas{border: 3px solid; background: #eee;}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="480" height="320"></canvas>
+	<script>
+		var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d")
+
+        //1 dibujar una bola luego la paseremos dentro de la function draw
+  //       ctx.beginPath();
+		// ctx.arc(50, 50, 10, 0, Math.PI*2);
+		// ctx.fillStyle = "#0095DD";
+		// ctx.fill();
+		// ctx.closePath();
+		//Para actualizar el dibujo del lienzo en cada fotograma, necesitamos definir una función de dibujo que se ejecutará una y otra vez, cambiando una serie de variables para modificar la posición de cada personaje (sprite). Para que una misma función se ejecute una y otra vez puedes utilizar una función de sincronización de JavaScript, como setInterval() or requestAnimationFrame().
+
+		//2 crear La función draw() se ejecutará dentro de setInterval cada 10 milisegundos:
+		// function draw() {
+		//     // código para dibujar
+		// }
+		// setInterval(draw, 10);
+
+		//3 pasar la bola dentro de la function draw
+		// function draw() {
+		//     ctx.beginPath();
+		// 	ctx.arc(50, 50, 10, 0, Math.PI*2);
+		// 	ctx.fillStyle = "#0095DD";
+		// 	ctx.fill();
+		// 	ctx.closePath();
+		// }
+		// setInterval(draw, 10);
+
+		// Para hacer mover la bola
+		//En primer lugar, en lugar de dibujar siempre en la posición (50, 50) definiremos un punto de inicio en la parte central inferior del lienzo en las variables llamadas x e y, a continuación, las utilizaremos para definir la posición en la que se dibuja el círculo.
+		// 4 Primero declaro esas dos variable como punto de inicio  
+		var x = canvas.width/2;
+		var y = canvas.height-30;
+
+		//5 en la  función draw (), cambio los valores de los ejes x y agrega por las variables x e y:
+		// function draw() {
+		//     ctx.beginPath();
+		// 	ctx.arc(x, y, 10, 0, Math.PI*2);
+		// 	ctx.fillStyle = "#0095DD";
+		// 	ctx.fill();
+		// 	ctx.closePath();
+		// }
+		// setInterval(draw, 10);
+
+		//6 Ahora viene la parte importante: queremos añadir un valor pequeño a x e y después de que cada fotograma se haya dibujado para que parezca que la pelota se está moviendo. Definamos estos valores pequeños como dx y dy, y establezcamos sus valores en 2 y -2 respectivamente. Agrega lo siguiente debajo de sus definiciones de variables x e y:
+		var dx = 2;
+		var dy = -2;
+
+		//7 Lo último que hay que hacer es actualizar x e y con nuestras variables dx y dy en cada fotograma, de modo que la bola será pintada en la nueva posición en cada actualización. Agrega las dos nuevas líneas siguientes indicadas a continuación a la función draw ():
+		// function draw() {
+		//     ctx.beginPath();
+		//     ctx.arc(x, y, 10, 0, Math.PI*2);
+		//     ctx.fillStyle = "#0095DD";
+		//     ctx.fill();
+		//     ctx.closePath();
+		//     x += dx;
+		//     y += dy;
+		// }
+		// setInterval(draw, 10);
+
+		//Borrar el  lienzo antes de cada fotograma
+		// hay un método para borrar todo el contenido de lienzo: clearRect (). Este método tiene cuatro parámetros: las coordenadas x e y de la esquina superior izquierda de un rectángulo y las coordenadas x e y de la esquina inferior derecha de un rectángulo.
+
+		//8 Añade la siguiente nueva línea resaltada a la función draw():
+		function draw() {
+		    ctx.clearRect(0, 0, canvas.width, canvas.height);
+		    ctx.beginPath();
+		    ctx.arc(x, y, 10, 0, Math.PI*2);
+		    ctx.fillStyle = "#0095DD";
+		    ctx.fill();
+		    ctx.closePath();
+		    x += dx;
+		    y += dy;
+		}
+		setInterval(draw, 10);
+	</script>
+</body>
+</html>	

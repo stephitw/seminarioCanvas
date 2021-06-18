@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Canvas Random</title>
+	<style>
+		canvas{
+			border: 1px solid;
+			/*width: 100%;
+			height: 100%;*/
+		}
+		body{
+			margin:0;
+			padding:0;
+			width: 100%;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script>
+		var canvas = document.querySelector("#canvas");
+		var c = canvas.getContext('2d');
+
+	
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		//3 crear multiples circulos para eso vamos a utilizar la POO
+		function Circle(x, y){
+			this.x = x;
+			this.y = y;
+			//4vamos a untilizar un metodo dentro de la function anonymous
+			this.draw = function(){
+				//5 poner el codigo del circulo dentro 
+				c.beginPath(); 
+				c.arc( x, y, 30, 0, Math.PI * 2, false); 
+				c.strokeStyle = 'blue'; 
+				c.stroke();
+
+			}
+		}
+		//4 vamos a crear un objeto, una variable
+		var circle = new Circle(200,200);
+		// circle.draw();
+		
+		//1 para hacer x y y random de manera + o - para que vaya donde sea
+		var x = Math.random()* innerWidth;
+		var y = Math.random()* innerHeight;
+		//2 para hacer x y y random de manera + o - math.random max is 1 min is 0
+		var dx = (Math.random() - 0.5) * 9;
+		var dy = (Math.random() - 0.5) * 9;
+		var radius = 30;
+
+		function animate(){
+			requestAnimationFrame(animate);
+			
+			c.clearRect(0, 0, innerWidth, innerHeight);
+			circle.draw();
+
+			c.beginPath(); 
+			c.arc( x, y, 30, 0, Math.PI * 2, false); 
+			c.strokeStyle = 'blue'; 
+			c.stroke();
+
+			if(x + radius > innerWidth || x-radius < 0){
+				dx = -dx;
+			}
+			
+			if(y + radius > innerHeight || y-radius < 0){
+				dy = -dy;
+			}
+
+			x += dx;
+			y += dy
+		}
+
+		animate();
+
+		
+
+	
+	</script>
+
+</body>
+</html>
